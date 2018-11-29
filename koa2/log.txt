@@ -1,0 +1,18 @@
+SUCCESS--2018-11-27 11:22:51
+----app started at port 3000...--描述无
+
+SUCCESS--2018-11-27 11:22:51
+----[kao2_mock.json] 添加 1 个接口--描述无
+
+TRACE--2018-11-27 11:22:51
+----[kao2_mock.json] init router xxx接口【/api/get/index】--描述无
+
+TRACE--2018-11-27 11:23:09
+----Process GET /api/get/index...--描述无
+
+TRACE--2018-11-27 11:23:09
+----Process GET /favicon.ico...--描述无
+
+TRACE--2018-11-27 11:24:04
+----Process GET /api/get/userList...--描述无
+

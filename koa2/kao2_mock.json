@@ -1,0 +1,10 @@
+[
+  {
+    "url": "/api/get/index",
+    "method": "get",
+    "response": {
+      "name": "pc",
+      "status": "success"
+    }
+  }
+]
