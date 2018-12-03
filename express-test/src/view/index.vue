@@ -17,11 +17,9 @@ export default {
       todos: []
     };
   },
-  methods: {
-
-  },
+  methods: {},
   mounted() {
-    findAll()
+    findAll();
   }
 };
 </script>
