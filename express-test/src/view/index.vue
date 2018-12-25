@@ -2,23 +2,38 @@
   <div class="todo-list">
     <div class="todo-form">
       <Form :model="todoForm" ref="todoForm" :rules="todoRules" :label-width="80">
-        <FormItem label="title">
-          <Input v-model="todoForm.input" placeholder="Enter something..."></Input>
+        <FormItem prop="title" label="title">
+          <Input v-model="todoForm.title" placeholder="Enter something..."></Input>
         </FormItem>
-        <FormItem label="label">
+        <FormItem prop="label" label="label">
           <Input v-model="todoForm.label" placeholder="for what"></Input>
         </FormItem>
-        <FormItem label="content">
+        <FormItem prop="content" label="content">
           <Input v-model="todoForm.content" type="textarea" placeholder="specific..."></Input>
         </FormItem>
-        <FormItem label="file">
+        <FormItem prop="file" label="file">
           <Input v-model="todoForm.file" placeholder="....."></Input>
         </FormItem>
-        <FormItem label="date">
+        <FormItem prop="date" label="date">
           <Input v-model="todoForm.date" placeholder="when..."></Input>
         </FormItem>
       </Form>
-      <Button type="primary" @click="addOne">addOne</Button>
+      <Button type="primary" @click="add('todoForm')">addOne</Button>
+      <!-- <Form ref="formInline" :model="formInline" :rules="ruleInline">
+        <FormItem prop="user">
+          <Input type="text" v-model="formInline.user" placeholder="Username">
+            <Icon type="ios-person-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem prop="password">
+          <Input type="password" v-model="formInline.password" placeholder="Password">
+            <Icon type="ios-lock-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
+        </FormItem>
+      </Form> -->
     </div>
     <ul class="todo-ul">
       <li v-for="todo in todos" :key="todo.id">
@@ -50,26 +65,47 @@ export default {
             trigger: "blur"
           }
         ],
+        label: [
+          {
+            required: true,
+            message: "标签呀！",
+            trigger: "blur"
+          }
+        ],
         content: [
           {
             required: true,
-            message: "这是内容，谢谢！！！",
+            message: "嘛呢！！！",
             trigger: "blur"
           }
         ],
         date: [
           {
             required: true,
-            message: "今个几号？",
+            message: "哪天？？",
+            trigger: "blur"
+          }
+        ]
+      },
+      formInline: {
+        user: "",
+        password: ""
+      },
+      ruleInline: {
+        user: [
+          {
+            required: true,
+            message: "Please fill in the user name",
             trigger: "blur"
           }
         ],
-        label: [
+        password: [
           {
             required: true,
-            message: "这是标签.",
+            message: "Please fill in the password.",
             trigger: "blur"
           }
+          // ,
           // {
           //   type: "string",
           //   min: 6,
@@ -81,9 +117,10 @@ export default {
     };
   },
   methods: {
-    addOne() {
-      this.$refs.todoForm.vilidate(vilid => {
-        if (vilid) {
+    add(name) {
+      this.$refs[name].validate(valid => {
+        console.log(valid);
+        if (valid) {
           addOne(this.todoForm)
             .then(res => {
               this.$Message.success("添加成功！！！");
@@ -91,6 +128,17 @@ export default {
             .catch(err => {
               this.$Message.error("添加失败！！！");
             });
+        } else {
+          this.$Message.error("请检查表单");
+        }
+      });
+    },
+    handleSubmit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.$Message.success("Success!");
+        } else {
+          this.$Message.error("Fail!");
         }
       });
     }
